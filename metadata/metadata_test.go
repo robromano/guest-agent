@@ -346,8 +346,8 @@ func TestVlanInterfaces(t *testing.T) {
 	  "parentInterface": "/computeMetadata/v1/instance/network-interfaces/1/",
       "mtu": 1500,
       "vlan": 12
-    },
-  },
+    }
+  }
 }`
 
 	cfg := fmt.Sprintf(`{"instance": {"vlanNetworkInterfaces": %s}}`, vlan)
