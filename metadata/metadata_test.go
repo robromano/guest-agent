@@ -327,7 +327,27 @@ func TestVlanInterfaces(t *testing.T) {
       "mtu": 1460,
       "vlan": 5
     }
-  }
+  },
+  "1": {
+    "11": {
+      "ipv6": [
+        "::1"
+      ],
+      "mac": "abcd_mac2",
+	  "parentInterface": "/computeMetadata/v1/instance/network-interfaces/1/",
+      "mtu": 8896,
+      "vlan": 11
+    },
+    "12": {
+      "ipv6": [
+        "::2"
+      ],
+      "mac": "abcd_mac3",
+	  "parentInterface": "/computeMetadata/v1/instance/network-interfaces/1/",
+      "mtu": 1500,
+      "vlan": 12
+    },
+  },
 }`
 
 	cfg := fmt.Sprintf(`{"instance": {"vlanNetworkInterfaces": %s}}`, vlan)
@@ -342,6 +362,23 @@ func TestVlanInterfaces(t *testing.T) {
 				IPv6:            []string{"::0"},
 			},
 		},
+		1: {
+			11: {
+				Mac:             "abcd_mac2",
+				ParentInterface: "/computeMetadata/v1/instance/network-interfaces/1/",
+				MTU:             8896,
+				Vlan:            11,
+				IPv6:            []string{"::1"},
+			},
+			12: {
+				Mac:             "abcd_mac3",
+				ParentInterface: "/computeMetadata/v1/instance/network-interfaces/1/",
+				MTU:             1500,
+				Vlan:            12,
+				IPv6:            []string{"::2"},
+			},
+		},	
+		
 	}
 
 	var md *Descriptor
